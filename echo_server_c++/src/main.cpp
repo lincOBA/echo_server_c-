@@ -1,8 +1,11 @@
 #include <unp.h>
+#include <serverFactory.h>
 
 int
 main(int argc, char **argv)
 {
+    ServerFactory::createEchoServer()->whoami();    
+
     int     listenfd, connfd;
     pid_t   childpid;
     socklen_t clilen;
