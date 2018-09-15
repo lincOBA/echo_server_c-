@@ -2,6 +2,8 @@
 
 #include <serverIf.h>
 #include <echoServer.h>
+#undef max
+#undef min
 #include <boost/shared_ptr.hpp>
 
 using namespace boost;
