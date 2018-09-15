@@ -2,6 +2,7 @@
 
 #include <serverIf.h>
 #include <echoServer.h>
+#include <timeServer.h>
 #undef max
 #undef min
 #include <boost/shared_ptr.hpp>
@@ -12,7 +13,7 @@ class ServerFactory
 {
 public:
     static shared_ptr<ServerIf> createEchoServer();
-
+    static shared_ptr<ServerIf> createTimeServer();
 private:
     ServerFactory(){};
     ~ServerFactory(){};

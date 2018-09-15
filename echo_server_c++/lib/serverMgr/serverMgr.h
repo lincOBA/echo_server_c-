@@ -13,8 +13,9 @@ public:
     ServerMgr();
     ~ServerMgr();
     
-    void addServer();
+    void addServer( shared_ptr<ServerIf> server);
+    void activeAllServer();
 private:
-    vetor<shared_ptr<ServerIf>> serverList;    
-}
+    vector< shared_ptr<ServerIf> > serverList;    
+};
 

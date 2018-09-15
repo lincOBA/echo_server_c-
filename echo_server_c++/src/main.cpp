@@ -1,10 +1,14 @@
 #include <unp.h>
 #include <serverFactory.h>
+#include <serverMgr.h>
 
 int
 main(int argc, char **argv)
 {
-    ServerFactory::createEchoServer()->whoami();    
+    ServerMgr serverMgr;
+    serverMgr.addServer(ServerFactory::createEchoServer());
+    serverMgr.addServer(ServerFactory::createTimeServer());
+    serverMgr.activeAllServer();
 
     int     listenfd, connfd;
     pid_t   childpid;
