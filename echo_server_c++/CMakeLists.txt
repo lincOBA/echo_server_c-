@@ -3,8 +3,5 @@ include_directories(inc)
 add_subdirectory(lib)
 add_executable(Server 
 src/main.cpp
-src/error.cpp
-src/sig.cpp
-src/echo.cpp
 )
 target_link_libraries(Server ServerFactory Lib) 
