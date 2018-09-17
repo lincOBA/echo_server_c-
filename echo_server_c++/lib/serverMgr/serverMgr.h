@@ -14,7 +14,7 @@ public:
     ServerMgr();
     ~ServerMgr();
     
-    void init(int argc, char* argv[]);
+    int init(int argc, char* argv[]);
     void start();
     
     void addServer( shared_ptr<ServerIf> server);

@@ -1,4 +1,5 @@
 #include "serverMgr.h"
+#include <argsReader.h>
 
 ServerMgr::ServerMgr():
     listenfd(-1)
@@ -51,7 +52,7 @@ again:
 
 void ServerMgr::err_sys(const char *fmt)
 {
-    printf(fmt);
+    printf("%s", fmt);
     exit(0);
 }
 
@@ -77,8 +78,16 @@ size_t ServerMgr::writen(int fd, const void *vptr, size_t n)
     return(n);
 }
 
-void ServerMgr::init(int argc, char** argv)
+int ServerMgr::init(int argc, char** argv)
 {
+    ArgsReader reader;
+    if(!reader.read(argc, argv))
+    {
+        return 0;
+    }
+
+    int serverPort = reader.getPort();
+
     struct sockaddr_in  servaddr;
     void    sig_chld(int);
 
@@ -87,14 +96,15 @@ void ServerMgr::init(int argc, char** argv)
     bzero (&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(SERV_PORT);
+    servaddr.sin_port = htons(serverPort);
 
     bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
 
     listen(listenfd, LISTENQ);
 
     signal (SIGCHLD, ServerMgr::sig_chld); /* must call waitpid() */
-
+    
+    return 1;
 }
 
 void ServerMgr::start()

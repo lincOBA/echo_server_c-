@@ -6,7 +6,10 @@ int
 main(int argc, char **argv)
 {
     ServerMgr serverMgr;
-    serverMgr.init(argc, argv);
+    if(!serverMgr.init(argc, argv))
+    {
+        return 0;
+    }
 
     serverMgr.addServer(ServerFactory::createEchoServer());
     serverMgr.addServer(ServerFactory::createTimeServer());
